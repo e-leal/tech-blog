@@ -11,21 +11,13 @@
 <body>
   <div class="wrapper">
     <header>
-    <h1>
-      <a href="/">Just Tech News</a>
-    </h1>
-    {{!-- <nav>
-      <a href="/login">login</a>
-    </nav> --}}
-    <nav>
-        {{#if loggedIn}}
-        <a href="/dashboard">dashboard</a>
-  <button id="logout" class="btn-no-style">logout</button>
-  {{else }}
-  <a href="/login">login</a>
-  {{/if}}
-</nav>
-  </header>
+      <h1>
+        <a href="/">Tech Blog</a>
+      </h1>
+      <nav>
+          <a href="/login">login</a>
+      </nav>
+    </header>
     <main>
       {{{ body }}}
     </main>
@@ -33,9 +25,7 @@
       Thanks for visiting!
     </footer>
   </div>
-  {{#if loggedIn}}
-<script src="/javascript/logout.js"></script>
-{{/if}}
+
 </body>
 
 </html>
