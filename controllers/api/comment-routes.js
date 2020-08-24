@@ -19,7 +19,7 @@ router.post('/', (req, res) => {
           comment_text: req.body.comment_text,
           post_id: req.body.post_id,
           // use the id from the session
-          user_id: req.body.user_id
+          user_id: req.session.user_id
         })
           .then(dbCommentData => res.json(dbCommentData))
           .catch(err => {
@@ -28,6 +28,15 @@ router.post('/', (req, res) => {
           });
       //}
 });
+
+router.get('/post/:id', (req, res) => {
+    if (req.session.loggedIn) {
+      res.render('single-post');
+    }
+    else {
+      res.render('single-post-no-form');
+    }
+  });
 
 router.delete('/:id', (req, res) => {
     Comment.destroy({
