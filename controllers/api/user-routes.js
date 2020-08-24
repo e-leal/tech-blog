@@ -8,8 +8,9 @@ router.get('/', (req, res) => {
       // Access our User model and run .findAll() method)
       User.findAll()
         .then(dbUserData => {
+          
             res.json(dbUserData)
-            console.log("our attempt at getting all user data: \n",res.json(dbUserData));})
+        })
         .catch(err => {
           console.log(err);
           res.status(500).json(err);
@@ -47,13 +48,13 @@ router.post('/', (req, res) => {
     password: req.body.password
   })
   .then(dbUserData => {
-    req.session.save(() => {
-      req.session.user_id = dbUserData.id;
-      req.session.username = dbUserData.username;
-      req.session.loggedIn = true;
+    // req.body.save(() => {
+    //   req.body.user_id = dbUserData.id;
+    //   req.body.username = dbUserData.username;
+    //   req.body.loggedIn = true;
   
       res.json(dbUserData);
-    });
+    //});
   });
 });
 
@@ -74,21 +75,21 @@ router.post('/login', (req, res) => {
     //res.json({ user: dbUserData });
     // Verify user
     const validPassword = dbUserData.checkPassword(req.body.password);
-    console.log("valid password id shoeing ", validPassword);
+    console.log("valid password id showing ", validPassword);
    
     if (!validPassword) {
         res.status(400).json({ message: 'Incorrect password!' });
         return;
     }
       
-    req.session.save(() => {
-      // declare session variables
-      req.session.user_id = dbUserData.id;
-      req.session.username = dbUserData.username;
-      req.session.loggedIn = true;
+    // req.session.save(() => {
+    //   // declare session variables
+    //   req.session.user_id = dbUserData.id;
+    //   req.session.username = dbUserData.username;
+    //   req.session.loggedIn = true;
 
       res.json({ user: dbUserData, message: 'You are now logged in!' });
-    });
+    //});
   });    
 });
 
